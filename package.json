@@ -7,11 +7,7 @@
   "engines": { "vscode": "^1.75.0" },
   "categories": ["Other"],
   "activationEvents": [
-    "onStartupFinished",
-    "onCommand:invisifolder.addFolder",
-    "onCommand:invisifolder.removeFolder",
-    "onCommand:invisifolder.toggleFolder",
-    "onCommand:invisifolder.manage"
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -23,9 +19,22 @@
     ],
     "menus": {
       "explorer/context": [
-        { "command": "invisifolder.addFolder", "when": "resourceScheme == 'file'", "group": "navigation" },
-        { "command": "invisifolder.toggleFolder", "when": "resourceScheme == 'file'", "group": "navigation" }
+        { "command": "invisifolder.addFolder", "when": "resourceScheme == 'file'", "group": "navigation" }
       ]
+    },
+    "configuration": {
+      "title": "Invisifolder",
+      "properties": {
+        "invisifolder.hiddenFolders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "List of workspace-relative paths to folders that should be hidden from the explorer",
+          "scope": "resource"
+        }
+      }
     }
   },
   "scripts": {
