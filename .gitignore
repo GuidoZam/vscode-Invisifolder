@@ -1,0 +1,30 @@
+# Node modules
+node_modules/
+
+# Build output
+out/
+dist/
+build/
+
+# VS Code test and packaging
+.vscode-test/
+*.vsix
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/*.code-workspace
+
+# Typescript cache / temp
+*.tsbuildinfo
+
+# Local workspace settings (do not commit user-specific local settings)
+.vscode/local.settings.json
