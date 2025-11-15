@@ -28,12 +28,25 @@ The extension will map these to `files.exclude` patterns.
 ### Hiding Folders
 
 1. **Via Explorer Context Menu**: Right-click any folder in the Explorer and select "Invisifolder: Hide Folder"
+
+   ![Context Menu](assets/context_menu.png)
+
 2. **Via Command Palette**: Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac), type "Invisifolder: Hide Folder", and follow the prompts
+
+   ![Command Palette](assets/command_palette.png)
+   
+   ![Hide Folder Command](assets/command_palette_hide_folder.png)
+
 3. **Via Status Bar**: Click the Invisifolder status bar item (shows "👁️‍🗨️ Invisifolder: X") and select "Add folder"
+
+   ![Status Bar](assets/status_bar.png)
 
 ### Unhiding Folders
 
 1. **Via Command Palette**: Press `Ctrl+Shift+P`, type "Invisifolder: Unhide Folder", and select a folder from the list
+
+   ![Unhide Folder Command](assets/command_palette_unhide_folder.png)
+
 2. **Via Status Bar**: Click the Invisifolder status bar item and select "Remove folder"
 
 ### Managing Hidden Folders
