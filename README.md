@@ -1,3 +1,5 @@
+![alt text](assets/Invisifolder_logo.png)
+
 # Invisifolder
 
 Hide selected folders in VS Code for a cleaner workspace.
@@ -22,6 +24,8 @@ Hidden folders are saved in workspace settings:
 "invisifolder.hiddenFolders": ["dist", "build"]
 ```
 The extension will map these to `files.exclude` patterns.
+
+> If someone else is not using Invisifolder, the hidden folders will still be hidden in Explorer due to the `files.exclude` settings.
 
 ## Usage
 
