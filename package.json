@@ -2,10 +2,9 @@
 	"name": "invisifolder",
 	"displayName": "Invisifolder",
 	"description": "Hide selected folders in VS Code for a cleaner workspace.",
-	"version": "0.1.0",
+	"version": "0.0.1",
 	"publisher": "guidozam",
 	"license": "MIT",
-	"author": "Guido Zambarda",
 	"icon": "assets/Invisifolder_logo_128x128.png",
 	"engines": {
 		"vscode": "^1.96.0"
@@ -17,13 +16,6 @@
 		"type": "git",
 		"url": "https://github.com/guidozam/vscode-invisifolder"
 	},
-	"maintainers": [
-		{
-			"name": "Guido Zambarda",
-			"email": "iamguidozam+theme@gmail.com",
-			"url": "https://iamguidozam.blog"
-		}
-	],
 	"activationEvents": [
 		"onStartupFinished"
 	],
@@ -75,11 +67,14 @@
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
 		"watch": "tsc -w -p ./",
-		"pretest": "npm run compile"
+		"pretest": "npm run compile",
+		"package": "vsce package",
+		"publish": "vsce publish"
 	},
 	"devDependencies": {
 		"@types/node": "^18.0.0",
 		"@types/vscode": "^1.75.0",
+		"@vscode/vsce": "^2.22.0",
 		"typescript": "^4.9.5",
 		"@vscode/test-electron": "^2.3.0"
 	}
