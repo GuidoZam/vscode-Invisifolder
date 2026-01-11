@@ -1,52 +1,81 @@
 {
-  "name": "invisifolder",
-  "displayName": "Invisifolder",
-  "description": "Hide selected folders in VS Code for a cleaner workspace.",
-  "version": "0.1.0",
-  "publisher": "your-publisher",
-  "engines": { "vscode": "^1.75.0" },
-  "categories": ["Other"],
-  "activationEvents": [
-    "onStartupFinished"
-  ],
-  "main": "./out/extension.js",
-  "contributes": {
-    "commands": [
-      { "command": "invisifolder.addFolder", "title": "Invisifolder: Hide Folder" },
-      { "command": "invisifolder.removeFolder", "title": "Invisifolder: Unhide Folder" },
-      { "command": "invisifolder.toggleFolder", "title": "Invisifolder: Toggle Folder Visibility" },
-      { "command": "invisifolder.manage", "title": "Invisifolder: Manage Hidden Folders" }
-    ],
-    "menus": {
-      "explorer/context": [
-        { "command": "invisifolder.addFolder", "when": "resourceScheme == 'file'", "group": "navigation" }
-      ]
-    },
-    "configuration": {
-      "title": "Invisifolder",
-      "properties": {
-        "invisifolder.hiddenFolders": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "default": [],
-          "description": "List of workspace-relative paths to folders that should be hidden from the explorer",
-          "scope": "resource"
-        }
-      }
-    }
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -w -p ./",
-    "pretest": "npm run compile"
-  },
-  "devDependencies": {
-    "@types/node": "^18.0.0",
-    "@types/vscode": "^1.75.0",
-    "typescript": "^4.9.5",
-    "@vscode/test-electron": "^2.3.0"
-  }
+	"name": "invisifolder",
+	"displayName": "Invisifolder",
+	"description": "Hide selected folders in VS Code for a cleaner workspace.",
+	"version": "0.0.1",
+	"publisher": "guidozam",
+	"license": "MIT",
+	"icon": "assets/Invisifolder_logo_128x128.png",
+	"engines": {
+		"vscode": "^1.96.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/guidozam/vscode-invisifolder"
+	},
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "invisifolder.addFolder",
+				"title": "Invisifolder: Hide Folder"
+			},
+			{
+				"command": "invisifolder.removeFolder",
+				"title": "Invisifolder: Unhide Folder"
+			},
+			{
+				"command": "invisifolder.toggleFolder",
+				"title": "Invisifolder: Toggle Folder Visibility"
+			},
+			{
+				"command": "invisifolder.manage",
+				"title": "Invisifolder: Manage Hidden Folders"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "invisifolder.addFolder",
+					"when": "resourceScheme == 'file'",
+					"group": "navigation"
+				}
+			]
+		},
+		"configuration": {
+			"title": "Invisifolder",
+			"properties": {
+				"invisifolder.hiddenFolders": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": [],
+					"description": "List of workspace-relative paths to folders that should be hidden from the explorer",
+					"scope": "resource"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -w -p ./",
+		"pretest": "npm run compile",
+		"package": "vsce package",
+		"publish": "vsce publish"
+	},
+	"devDependencies": {
+		"@types/node": "^18.0.0",
+		"@types/vscode": "^1.75.0",
+		"@vscode/vsce": "^2.22.0",
+		"typescript": "^4.9.5",
+		"@vscode/test-electron": "^2.3.0"
+	}
 }

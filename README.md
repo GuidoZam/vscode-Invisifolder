@@ -1,5 +1,7 @@
 # Invisifolder
 
+![alt text](assets/Invisifolder_logo_128x128.png)
+
 Hide selected folders in VS Code for a cleaner workspace.
 
 ## Features
@@ -22,6 +24,8 @@ Hidden folders are saved in workspace settings:
 "invisifolder.hiddenFolders": ["dist", "build"]
 ```
 The extension will map these to `files.exclude` patterns.
+
+> If someone else is not using Invisifolder, the hidden folders will still be hidden in Explorer due to the `files.exclude` settings.
 
 ## Usage
 
@@ -70,9 +74,34 @@ The extension stores hidden folders in your workspace settings (`.vscode/setting
 }
 ```
 
-## Contributing
+## Development & Publishing
 
-Contributions welcome — open issues or PRs. Run `npm run compile` before pushing.
+### Local Development
+1. Clone the repository
+2. Run `npm install` to install dependencies
+3. Run `npm run compile` to compile TypeScript
+4. Press `F5` to open a new Extension Development Host window
+
+### Publishing to Marketplace
+
+This extension uses automated GitHub Actions for publishing:
+
+#### Setup (One-time)
+1. Get a Personal Access Token (PAT) from [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage/publishers)
+2. Add the PAT as a repository secret named `VSCE_PAT` in GitHub Settings → Secrets and variables → Actions
+
+#### Publishing Process
+- **Automatic**: Create a new GitHub release with a version tag (e.g., `v1.0.0`)
+  - Stable releases: Use normal releases
+  - Pre-releases: Check "This is a pre-release" option
+- **Manual**: Use the "Publish VS Code Extension" workflow dispatch in GitHub Actions
+
+The workflows will:
+- Build and test the extension on multiple platforms
+- Package the extension as a `.vsix` file
+- Publish to VS Code Marketplace
+- Attach the `.vsix` file to the GitHub release
+
 
 ## License
 
