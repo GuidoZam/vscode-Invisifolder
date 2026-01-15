@@ -2,7 +2,7 @@
 	"name": "invisifolder",
 	"displayName": "Invisifolder",
 	"description": "Hide selected folders in VS Code for a cleaner workspace.",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "guidozam",
 	"license": "MIT",
 	"icon": "assets/Invisifolder_logo_128x128.png",
@@ -43,8 +43,8 @@
 			"explorer/context": [
 				{
 					"command": "invisifolder.addFolder",
-					"when": "resourceScheme == 'file'",
-					"group": "navigation"
+					"when": "explorerResourceIsFolder",
+					"group": "2_workspace"
 				}
 			]
 		},
