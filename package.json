@@ -2,7 +2,7 @@
 	"name": "invisifolder",
 	"displayName": "Invisifolder",
 	"description": "Hide selected folders in VS Code for a cleaner workspace.",
-	"version": "0.0.2",
+	"version": "0.1.0",
 	"publisher": "guidozam",
 	"license": "MIT",
 	"icon": "assets/Invisifolder_logo_128x128.png",
@@ -16,8 +16,20 @@
 		"type": "git",
 		"url": "https://github.com/guidozam/vscode-invisifolder"
 	},
+	"bugs": {
+		"url": "https://github.com/GuidoZam/vscode-invisifolder/issues"
+	},
+	"homepage": "https://github.com/GuidoZam/vscode-invisifolder#readme",
 	"activationEvents": [
 		"onStartupFinished"
+	],
+	"keywords": [
+		"developer tool",
+		"status bar",
+		"workspace",
+		"folder management",
+		"folder visibility",
+		"explorer"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -68,8 +80,12 @@
 		"compile": "tsc -p ./",
 		"watch": "tsc -w -p ./",
 		"pretest": "npm run compile",
+		"set-preview:true": "node scripts/set-preview.js true",
+		"set-preview:false": "node scripts/set-preview.js false",
 		"package": "vsce package",
-		"publish": "vsce publish"
+		"package:prerelease": "vsce package --pre-release",
+		"publish": "vsce publish",
+		"publish:prerelease": "vsce publish --pre-release"
 	},
 	"devDependencies": {
 		"@types/node": "^18.0.0",

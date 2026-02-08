@@ -1,0 +1,37 @@
+name: Pre-release
+
+on:
+  push:
+    branches:
+      - pre-release
+
+jobs:
+  publish-pre-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set preview flag to true
+        run: node scripts/set-preview.js true
+
+      - name: Compile TypeScript
+        run: npm run compile
+
+      - name: Package extension as pre-release
+        run: npm run package:prerelease
+
+      - name: Publish pre-release to VS Code Marketplace
+        run: npm run publish:prerelease
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
