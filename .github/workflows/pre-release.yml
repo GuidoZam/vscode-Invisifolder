@@ -34,4 +34,4 @@ jobs:
       - name: Publish pre-release to VS Code Marketplace
         run: npm run publish:prerelease
         env:
-          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+          VSCE_PAT: ${{ secrets.PERSONAL_TOKEN }}
