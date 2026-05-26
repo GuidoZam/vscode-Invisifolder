@@ -1,0 +1,43 @@
+name: Pre-release
+
+on:
+  push:
+    branches:
+      - pre-release
+
+jobs:
+  publish-pre-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout
+        run: |
+          git init .
+          git remote add origin https://github.com/${{ github.repository }}.git
+          git fetch --depth=1 origin ${{ github.sha }}
+          git checkout --detach FETCH_HEAD
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set preview flag to true
+        run: npm run set-preview:true
+
+      - name: Compile TypeScript
+        run: npm run compile
+
+      - name: Package extension as pre-release
+        run: npm run package:prerelease
+
+      - name: Publish pre-release to VS Code Marketplace
+        run: npm run publish:prerelease
+        env:
+          VSCE_PAT: ${{ secrets.PERSONAL_TOKEN }}
