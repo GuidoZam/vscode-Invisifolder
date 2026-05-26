@@ -7,12 +7,18 @@ type HiddenList = string[];
  */
 const CONFIG_KEY = "invisifolder.hiddenFolders";
 const FILES_EXCLUDE_KEY = "files.exclude";
+const STATUS_BAR_DISPLAY_KEY = "invisifolder.statusBarDisplay";
+
+function getScopedConfiguration(): vscode.WorkspaceConfiguration {
+  // Use an explicit scope to avoid warnings when reading resource-scoped settings.
+  return vscode.workspace.getConfiguration(undefined, null);
+}
 
 /**
  * Read hidden list from workspace settings.
  */
 async function readHiddenList(): Promise<HiddenList> {
-  const cfg = vscode.workspace.getConfiguration();
+  const cfg = getScopedConfiguration();
   const list = cfg.get<HiddenList>(CONFIG_KEY);
   return Array.isArray(list) ? list : [];
 }
@@ -21,7 +27,7 @@ async function readHiddenList(): Promise<HiddenList> {
  * Write hidden list to workspace settings (.vscode/settings.json).
  */
 async function writeHiddenList(list: HiddenList): Promise<void> {
-  const cfg = vscode.workspace.getConfiguration();
+  const cfg = getScopedConfiguration();
   await cfg.update(CONFIG_KEY, list, vscode.ConfigurationTarget.Workspace);
 }
 
@@ -30,7 +36,7 @@ async function writeHiddenList(list: HiddenList): Promise<void> {
  * This keeps other files.exclude keys untouched and updates keys for the entries in the hidden list.
  */
 async function applyToFilesExclude(list: HiddenList): Promise<void> {
-  const cfg = vscode.workspace.getConfiguration();
+  const cfg = getScopedConfiguration();
   const current = cfg.get<Record<string, boolean>>(FILES_EXCLUDE_KEY) ?? {};
   const next = Object.assign({}, current);
 
@@ -97,7 +103,15 @@ export function activate(context: vscode.ExtensionContext) {
   // Refresh status bar label
   async function refreshStatus() {
     const list = await readHiddenList();
-    statusBar.text = `$(eye-closed) Invisifolder: ${list.length}`;
+    // Status bar display is not resource-scoped, so use regular getConfiguration
+    const displayStyle = vscode.workspace.getConfiguration().get<string>(STATUS_BAR_DISPLAY_KEY) ?? "full";
+    
+    if (displayStyle === "minimal") {
+      statusBar.text = `$(eye-closed) ${list.length}`;
+    } else {
+      statusBar.text = `$(eye-closed) Invisifolder: ${list.length}`;
+    }
+    
     statusBar.tooltip = list.length > 0 ? `Hidden folders:\n${list.join("\n")}` : "No hidden folders (click to manage)";
     statusBar.show();
   }
@@ -105,7 +119,7 @@ export function activate(context: vscode.ExtensionContext) {
   // Listen to settings change to refresh UI
   context.subscriptions.push(
     vscode.workspace.onDidChangeConfiguration(async (e) => {
-      if (e.affectsConfiguration(CONFIG_KEY) || e.affectsConfiguration(FILES_EXCLUDE_KEY)) {
+      if (e.affectsConfiguration(CONFIG_KEY) || e.affectsConfiguration(FILES_EXCLUDE_KEY) || e.affectsConfiguration(STATUS_BAR_DISPLAY_KEY)) {
         await refreshStatus();
       }
     })
