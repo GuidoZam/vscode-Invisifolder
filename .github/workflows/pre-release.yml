@@ -8,10 +8,16 @@ on:
 jobs:
   publish-pre-release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        run: |
+          git init .
+          git remote add origin https://github.com/${{ github.repository }}.git
+          git fetch --depth=1 origin ${{ github.sha }}
+          git checkout --detach FETCH_HEAD
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
