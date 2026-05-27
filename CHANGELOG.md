@@ -2,6 +2,11 @@
 
 All notable changes to the "invisifolder" extension will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- GitHub Actions workflow for automated pre-release publishing to VS Code Marketplace
+
 ## [0.0.2] - 2026-01-17
 
 ### Changed
