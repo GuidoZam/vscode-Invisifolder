@@ -2,7 +2,7 @@
 	"name": "invisifolder",
 	"displayName": "Invisifolder",
 	"description": "Hide selected folders in VS Code for a cleaner workspace.",
-	"version": "0.0.2",
+	"version": "0.1.1",
 	"publisher": "guidozam",
 	"license": "MIT",
 	"icon": "assets/Invisifolder_logo_128x128.png",
@@ -16,8 +16,20 @@
 		"type": "git",
 		"url": "https://github.com/guidozam/vscode-invisifolder"
 	},
+	"bugs": {
+		"url": "https://github.com/GuidoZam/vscode-invisifolder/issues"
+	},
+	"homepage": "https://github.com/GuidoZam/vscode-invisifolder#readme",
 	"activationEvents": [
 		"onStartupFinished"
+	],
+	"keywords": [
+		"developer tool",
+		"status bar",
+		"workspace",
+		"folder management",
+		"folder visibility",
+		"explorer"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -59,6 +71,19 @@
 					"default": [],
 					"description": "List of workspace-relative paths to folders that should be hidden from the explorer",
 					"scope": "resource"
+				},
+				"invisifolder.statusBarDisplay": {
+					"type": "string",
+					"enum": [
+						"full",
+						"minimal"
+					],
+					"default": "full",
+					"description": "Choose how the extension appears in the status bar: 'full' shows icon and text, 'minimal' shows only icon",
+					"enumDescriptions": [
+						"Show icon and text (e.g., '$(eye-closed) Invisifolder: 3')",
+						"Show only icon and count (e.g., '$(eye-closed) 3')"
+					]
 				}
 			}
 		}
@@ -68,8 +93,12 @@
 		"compile": "tsc -p ./",
 		"watch": "tsc -w -p ./",
 		"pretest": "npm run compile",
+		"set-preview:true": "node scripts/set-preview.js true",
+		"set-preview:false": "node scripts/set-preview.js false",
 		"package": "vsce package",
-		"publish": "vsce publish"
+		"package:prerelease": "vsce package --pre-release",
+		"publish": "vsce publish",
+		"publish:prerelease": "vsce publish --pre-release"
 	},
 	"devDependencies": {
 		"@types/node": "^18.0.0",
@@ -77,5 +106,6 @@
 		"@vscode/vsce": "^2.22.0",
 		"typescript": "^4.9.5",
 		"@vscode/test-electron": "^2.3.0"
-	}
+	},
+	"preview": true
 }
